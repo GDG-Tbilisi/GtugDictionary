@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+//Testing Commit
+
 public class GtugDictionaryActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
