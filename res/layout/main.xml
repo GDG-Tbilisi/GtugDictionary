@@ -4,9 +4,37 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <EditText
+        android:id="@+id/txtWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+    </EditText>
+
+    
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        
+        <Button
+        android:id="@+id/btnGo"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Go"/>
+        
+        
+    </LinearLayout>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.16"
         android:text="HELLO WORLD !" />
 
 </LinearLayout>
