@@ -1,8 +1,2 @@
-# Compiled source #
-###################
-*.class
-*.apk
-*.dex
-*.ap_
 /bin
 /gen
