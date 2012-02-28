@@ -4,3 +4,5 @@
 *.apk
 *.dex
 *.ap_
+/bin
+/gen
