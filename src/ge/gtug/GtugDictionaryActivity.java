@@ -11,20 +11,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
+import android.widget.TextView;
 //Testing Commit
 
 public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DataBaseHelper myDbHelper;
 	Button btnGo;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		 btnGo = (Button) findViewById(R.id.btnGo);
-		 myDbHelper = new DataBaseHelper(this);
+				   btnGo = (Button) findViewById(R.id.btnGo);
+		 final TextView  txtResult = (TextView) findViewById(R.id.txtResult);
+		 		   myDbHelper = new DataBaseHelper(this);
 	       
 		
 		try {
@@ -39,8 +41,9 @@ public class GtugDictionaryActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
-			
-			
+			myDbHelper.openDataBase();
+			txtResult.setText(myDbHelper.getTranslation());
+			myDbHelper.close();
 			
 		}
 	});	
