@@ -24,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	// The Android's default system path of your application database.
 	private static String DB_PATH = "/data/data/ge.gtug/databases/";
 	private static String DB_NAME = "ilingoka.db";
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	public static final String GEO = "geo";
 	public static final String GEO_ID = "id";
 	public static final String GEO_WORD = "geo";
@@ -48,6 +48,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	protected Cursor cursor;
 	protected ListAdapter adapter;
 	
+	public static final String VIEW_NAME =  "DicV";
+	String createView ="CREATE VIEW IF NOT EXISTS DicV AS  Select g.geo,e.eng, e.transcription,t.name, t.abbr From geo_eng ge inner join geo g on ge.geo_id=g._id inner join eng e on ge.eng_id = e._id inner join types t on ge.type =t._id";
+
+	
+	
 	public DataBaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.myContext = context;
@@ -57,25 +62,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		/*
-		 * db.execSQL("CREATE TABLE android_metadata (locale TEXT DEFAULT 'en_US')"
-		 * ); db.execSQL("INSERT INTO android_metadata VALUES ('en_US')");
-		 * db.execSQL("CREATE VIEW "+viewWords+
-		 * " AS select t.abbr,g.geo ,e.eng " +"  from geo_eng ge, " + "geo g, "
-		 * + "types t , " + "eng e	" +"where g.id = ge.geo_id " +
-		 * "	and t.id = ge.type " + "	and e.id=ge.eng_id);"); //Inserts
-		 * pre-defined departments
-		 */System.out.println("onCreate Called");
-		System.out.println("View Created");
+		
+		
+	//	System.out.println("onCreate Called");
+		//System.out.println("View Created");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		myContext.deleteDatabase(DB_NAME);
 		System.out.println("DB DELETED");
-
-		Log.w("RatedCalls Database",
-				"Upgrading database, this will drop tables and recreate.");
 		db.execSQL("DROP TABLE IF EXISTS " + DB_NAME);
 		onCreate(db);
 	}
@@ -93,7 +89,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			try {
 
 				copyDataBase();
-
+				System.out.println("oDatabase Copy");
+				
+				SQLiteDatabase db = this.getReadableDatabase();
+				db.execSQL(createView);
+				System.out.println("View Created");
 			} catch (IOException e) {
 
 				throw new Error("Error copying database");
@@ -181,7 +181,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
 		cursor = db.rawQuery(
-						"SELECT  eng FROM eng WHERE eng LIKE ?",
+						"SELECT  geo FROM DicV WHERE eng LIKE ?",
 						new String[] {  text.toString()
 							+ "%" });
 		

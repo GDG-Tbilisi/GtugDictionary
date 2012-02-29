@@ -56,9 +56,9 @@ public class GtugDictionaryActivity extends Activity {
 		return true;
 	}
 	 public void search(View view) {
-		String t = "";
+	//	String t = "";
 		 myDbHelper.translateWord(searchText.getText());
-		 txt.setText(t);
+	//	 txt.setText(t);
 		// searchText.setText(txt);
 		 System.out.println("Event called from xml!!!");
 	 
