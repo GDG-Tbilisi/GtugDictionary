@@ -8,13 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.Editable;
 import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 	// The Android's default system path of your application database.
@@ -31,18 +35,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public static final String ENG_WORD = "eng";
 	public static final String ENG_TYPE = "type";
 	public static final String TRANSCRIPTOPN = "transcription";
-	
+
 	public static final String TYPES = "types";
 	public static final String TYPE_ID = "id";
 	public static final String TYPE_NAME = "name";
 	public static final String TYPE_ABBR = "abbr";
-	
 
 	private SQLiteDatabase myDataBase;
 	private final Context myContext;
 	private Resources resources;
 	private String viewWords = "viewWords";
-
+	protected Cursor cursor;
+	protected ListAdapter adapter;
+	
 	public DataBaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.myContext = context;
@@ -52,31 +57,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-	/*	db.execSQL("CREATE TABLE android_metadata (locale TEXT DEFAULT 'en_US')");
-		db.execSQL("INSERT INTO android_metadata VALUES ('en_US')");
-		 db.execSQL("CREATE VIEW "+viewWords+
-				    " AS select t.abbr,g.geo ,e.eng "
-			 			+"  from geo_eng ge, "
-						+	"geo g, "
-						+	"types t , "
-						+	"eng e	"
-						+"where g.id = ge.geo_id "
-					+	"	and t.id = ge.type "
-					+	"	and e.id=ge.eng_id);");
-				  //Inserts pre-defined departments
-*/		  System.out.println("onCreate Called");		
-				  System.out.println("View Created");		
+		/*
+		 * db.execSQL("CREATE TABLE android_metadata (locale TEXT DEFAULT 'en_US')"
+		 * ); db.execSQL("INSERT INTO android_metadata VALUES ('en_US')");
+		 * db.execSQL("CREATE VIEW "+viewWords+
+		 * " AS select t.abbr,g.geo ,e.eng " +"  from geo_eng ge, " + "geo g, "
+		 * + "types t , " + "eng e	" +"where g.id = ge.geo_id " +
+		 * "	and t.id = ge.type " + "	and e.id=ge.eng_id);"); //Inserts
+		 * pre-defined departments
+		 */System.out.println("onCreate Called");
+		System.out.println("View Created");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-		 myContext.deleteDatabase(DB_NAME); 
-		 System.out.println("DB DELETED");
-		 
-		 Log.w("RatedCalls Database",
-	                "Upgrading database, this will drop tables and recreate.");
-	        db.execSQL("DROP TABLE IF EXISTS " + DB_NAME);
-	        onCreate(db);
+		myContext.deleteDatabase(DB_NAME);
+		System.out.println("DB DELETED");
+
+		Log.w("RatedCalls Database",
+				"Upgrading database, this will drop tables and recreate.");
+		db.execSQL("DROP TABLE IF EXISTS " + DB_NAME);
+		onCreate(db);
 	}
 
 	public void createDataBase() throws IOException {
@@ -162,17 +163,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public String getTranslation() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String result = null;
-		String[] columns = new String[] {TYPE_NAME, TYPE_ABBR };
-		Cursor c = db.query(TYPES, columns, null,
-			null, null, null, null);
-		
-		for(c.moveToFirst();!c.isAfterLast();c.moveToNext()){
-		
-		result = c.getString(c.getColumnIndex(TYPE_NAME)) + " - " + c.getString(c.getColumnIndex(TYPE_ABBR))+ "\n" + "Bla bla";
+		String[] columns = new String[] { TYPE_NAME, TYPE_ABBR };
+		Cursor c = db.query(TYPES, columns, null, null, null, null, null);
+
+		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+
+			result = c.getString(c.getColumnIndex(TYPE_NAME)) + " - "
+					+ c.getString(c.getColumnIndex(TYPE_ABBR)) + "\n"
+					+ "Bla bla";
 		}
 		System.out.println("result is " + result);
 		System.out.println("Result was Returned");
 		return result;
+	}
+
+	public String translateWord(Editable text) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = this.getReadableDatabase();
+		cursor = db.rawQuery(
+						"SELECT  eng FROM eng WHERE eng LIKE ?",
+						new String[] {  text.toString()
+							+ "%" });
+		
+		String result = null;
+		for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
+			result += cursor.getString(cursor.getColumnIndex("eng"))  + "\n";
+		}
+		/*adapter = new SimpleCursorAdapter(this, 
+				R.layout.word_list_item,
+				cursor, new String[] { "geoWord", "engWord" },
+				new int[] { R.id.engWord, R.id.geoWord});*/
+		 System.out.println("Result Returned" + result);
+		 System.out.println("text passed parameter: " + text);
+		return result;
+		
 	}
 
 }
