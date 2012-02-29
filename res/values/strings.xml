@@ -2,6 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, GtugDictionaryActivity!</string>
-    <string name="app_name">GtugDictionary</string>
-
+    <string name="app_name">Geo-Eng &amp; Eng-Geo Dictionary</string>
+    <string name="aboutUS">This dictionary is made by a small group of young folks from Tbilisi GTUG: Demur Nodia, Irakli Sheklashvili, Otar Zakalashvili, Levan Velijanashvili and Giorgi Tkeshelashvili. We would like to say special thanks to Ioseb Dzmanashvili for helping us. We acknowledge that this application may contain some bugs as it is our first Android app. So, your feedback is really important to us. Feel free to send any suggestions and ideas on tbilisi@gtug.ge. Thanks for using our app !</string>
+    
 </resources>

@@ -67,9 +67,9 @@ public class GtugDictionaryActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-		case R.id.options:
-			startActivity(new Intent(this, Options.class));
-			return true;
+//		case R.id.options:
+//			startActivity(new Intent(this, Options.class));
+//			return true;
 		case R.id.help:
 			startActivity(new Intent(this, Help.class));
 			return true;
