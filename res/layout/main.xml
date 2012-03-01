@@ -5,10 +5,6 @@
     android:orientation="vertical"
     android:paddingTop="4px" >
 
-    <include
-        android:id="@+id/search"
-        layout="@layout/search" />
-
    
 
     <!-- <ListView
@@ -19,14 +15,11 @@
         android:drawSelectorOnTop="false" />
  -->
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/search"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/search"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="34dp"
-        android:text="TextView" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="56dp"
+        layout="@layout/search" />
 
 </RelativeLayout>

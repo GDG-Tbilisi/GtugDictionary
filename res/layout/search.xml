@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="4px">
+    android:orientation="vertical"
+    android:paddingTop="4px" >
 
-	<ImageButton
-		android:id="@+id/searchButton"
-		android:text="Search"
-		android:onClick="search"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentRight="true"
-		android:layout_width="70px"
-		android:layout_height="wrap_content"
-		android:src="@drawable/search"/>
-	
-	<EditText
-		android:id="@+id/searchText"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentLeft="true"
-		android:layout_toLeftOf="@id/searchButton"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"/>
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/georgia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/georgia" />
+
+        <ImageView
+            android:id="@+id/england"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/england" />
+
+        <Button
+            android:id="@+id/switcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Button" />
+
+        <RelativeLayout>
+        </RelativeLayout>
+    </TableRow>
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tableRow2" />
+
+    <ImageButton
+        android:id="@+id/searchButton"
+        android:layout_width="70px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tableRow2"
+        android:onClick="search"
+        android:src="@drawable/search"
+        android:text="Search" />
 
 </RelativeLayout>
