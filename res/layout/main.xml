@@ -8,7 +8,6 @@
     <include
         android:id="@+id/search"
         layout="@layout/search" />
-
    
 
     <!-- <ListView
@@ -18,15 +17,17 @@
         android:layout_below="@id/search"
         android:drawSelectorOnTop="false" />
  -->
-
-    <TextView
-        android:id="@+id/textView1"
+
+    <EditText
+        android:id="@+id/resultBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/search"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="34dp"
-        android:text="TextView" />
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

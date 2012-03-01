@@ -18,6 +18,7 @@
 	<EditText
 		android:id="@+id/searchText"
 		android:layout_alignParentTop="true"
+		android:maxLength="12"
 		android:layout_alignParentLeft="true"
 		android:layout_toLeftOf="@id/searchButton"
 		android:layout_width="fill_parent"
