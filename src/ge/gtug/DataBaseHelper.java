@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-
 public class DataBaseHelper extends SQLiteOpenHelper {
 	// The Android's default system path of your application database.
 	private static String DB_PATH = "/data/data/ge.gtug/databases/";
@@ -47,12 +46,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	private String viewWords = "viewWords";
 	protected Cursor cursor;
 	protected ListAdapter adapter;
-	
-	public static final String VIEW_NAME =  "DicV";
-	String createView ="CREATE VIEW IF NOT EXISTS DicV AS  Select g.geo,e.eng, e.transcription,t.name, t.abbr From geo_eng ge inner join geo g on ge.geo_id=g._id inner join eng e on ge.eng_id = e._id inner join types t on ge.type =t._id";
 
-	
-	
+	public static final String VIEW_NAME = "DicV";
+	String createView = "CREATE VIEW IF NOT EXISTS DicV AS  Select g.geo,e.eng, e.transcription,t.name, t.abbr From geo_eng ge inner join geo g on ge.geo_id=g._id inner join eng e on ge.eng_id = e._id inner join types t on ge.type =t._id";
+
 	public DataBaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.myContext = context;
@@ -62,10 +59,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		
-		
-	//	System.out.println("onCreate Called");
-		//System.out.println("View Created");
+
+		// System.out.println("onCreate Called");
+		// System.out.println("View Created");
 	}
 
 	@Override
@@ -90,7 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 				copyDataBase();
 				System.out.println("oDatabase Copy");
-				
+
 				SQLiteDatabase db = this.getReadableDatabase();
 				db.execSQL(createView);
 				System.out.println("View Created");
@@ -180,8 +176,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public String translateWord(Editable text) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
-		cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
-		
+	//	cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
+		cursor = db.rawQuery("select * from geo g where g._id in (select l.geo_id from geo_eng l where l.eng_id in (select e._id from eng e where e.eng  like '"
+		+  text.toString() + "%'"+"))", new String [] {});
 		String result = "";
 	
 		for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
@@ -198,5 +195,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		return result;
 		
 	}
-
 }
