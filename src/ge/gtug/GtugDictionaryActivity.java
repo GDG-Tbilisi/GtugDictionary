@@ -32,7 +32,9 @@ public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DataBaseHelper myDbHelper;
 	protected SQLiteDatabase db;
-	
+	public  ImageView geo ;
+	public  ImageView eng ;
+	public boolean IsGeo = false;
 	
     
     
@@ -46,8 +48,8 @@ public class GtugDictionaryActivity extends Activity {
 		setContentView(R.layout.main);
 		 txt = (TextView) findViewById(R.id.textView1);
 		 
-		 final ImageView geo = (ImageView) findViewById(R.id.georgia);
-		 final ImageView eng = (ImageView) findViewById(R.id.england);
+		 geo = (ImageView) findViewById(R.id.georgia);
+		 eng = (ImageView) findViewById(R.id.england);
 		 
 		 Button button = (Button) findViewById(R.id.switcher);
 		 button.setOnClickListener(new OnClickListener() {
@@ -56,9 +58,12 @@ public class GtugDictionaryActivity extends Activity {
 						if (i==1){
 							geo.setImageResource(R.drawable.england);
 							eng.setImageResource(R.drawable.georgia);
+							IsGeo = false;
 							i++;
-							} else { geo.setImageResource(R.drawable.georgia);
-							         eng.setImageResource(R.drawable.england);
+							} else {
+								geo.setImageResource(R.drawable.georgia);
+							    eng.setImageResource(R.drawable.england);
+							    IsGeo = true;
 							         i--;
 							 }
 						
@@ -89,16 +94,14 @@ public class GtugDictionaryActivity extends Activity {
 		return true;
 	}
 	 public void search(View view) {
-	//	String t = "";
-		String result = myDbHelper.translateWord(searchText.getText());		
-		resultBox.setText(result);
-	    // if (result.length()<3)
-		   // Toast.makeText(this,"Suck" + result,Toast.LENGTH_LONG).show();
+		 String result = "";	
 		
-	//	 txt.setText(t);
-		// searchText.setText(txt);
-		 
-	 
+		if (IsGeo)
+		   result += myDbHelper.translateWord(searchText.getText(),true);
+		else
+		   result += myDbHelper.translateWord(searchText.getText(),false);
+		
+		resultBox.setText(result);		
 	 }
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -13,11 +13,9 @@
         android:id="@+id/resultBox"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/search"
+        android:layout_marginTop="102dp"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
