@@ -34,12 +34,7 @@ public class GtugDictionaryActivity extends Activity {
 	protected SQLiteDatabase db;
 	public  ImageView geo ;
 	public  ImageView eng ;
-	public boolean IsGeo = false;
-	
-    
-    
-	
-	
+	public boolean IsGeo = true;	
 	protected EditText searchText, resultBox;
 	TextView txt;
 	@Override
@@ -95,13 +90,20 @@ public class GtugDictionaryActivity extends Activity {
 	}
 	 public void search(View view) {
 		 String result = "";	
+		 myDbHelper.openDataBase();
 		
 		if (IsGeo)
 		   result += myDbHelper.translateWord(searchText.getText(),true);
 		else
 		   result += myDbHelper.translateWord(searchText.getText(),false);
+		myDbHelper.close();
 		
 		resultBox.setText(result);		
+	 }
+	 
+	 public void swithButton()
+	 {
+		 
 	 }
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
