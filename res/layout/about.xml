@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
 
     
 
@@ -13,18 +14,20 @@
         <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF" >
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tbilisigtug" />
+                android:src="@drawable/gtugtbilisi" />
             
         </TableRow>
     
@@ -32,13 +35,19 @@
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/aboutUS"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            
+            
             android:textAppearance="?android:attr/textAppearanceMedium" />
         
     </TableRow>

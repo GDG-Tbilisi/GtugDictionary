@@ -4,6 +4,8 @@ import java.io.IOException;
 
 
 
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,16 +20,22 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 //Testing Commit
 
+
 public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DataBaseHelper myDbHelper;
 	protected SQLiteDatabase db;
+	
+	
+    
+    
 	
 	
 	protected EditText searchText, resultBox;
@@ -37,6 +45,27 @@ public class GtugDictionaryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		 txt = (TextView) findViewById(R.id.textView1);
+		 
+		 final ImageView geo = (ImageView) findViewById(R.id.georgia);
+		 final ImageView eng = (ImageView) findViewById(R.id.england);
+		 
+		 Button button = (Button) findViewById(R.id.switcher);
+		 button.setOnClickListener(new OnClickListener() {
+			    int i = 1;
+					public void onClick(View v) {
+						if (i==1){
+							geo.setImageResource(R.drawable.england);
+							eng.setImageResource(R.drawable.georgia);
+							i++;
+							} else { geo.setImageResource(R.drawable.georgia);
+							         eng.setImageResource(R.drawable.england);
+							         i--;
+							 }
+						
+							
+					}
+
+				});
 
 		myDbHelper = new DataBaseHelper(this);
 		  searchText = (EditText) findViewById(R.id.searchText);
@@ -75,11 +104,8 @@ public class GtugDictionaryActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-//		case R.id.options:
-//			startActivity(new Intent(this, Options.class));
-//			return true;
-		case R.id.help:
-			startActivity(new Intent(this, Help.class));
+		case R.id.about:
+			startActivity(new Intent(this, About.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
