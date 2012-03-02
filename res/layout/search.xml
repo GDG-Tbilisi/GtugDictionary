@@ -16,19 +16,14 @@
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity = "center" >
 
         <ImageView
             android:id="@+id/georgia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/georgia" />
-
-        <ImageView
-            android:id="@+id/england"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/england" />
 
         <Button
             android:id="@+id/switcher"
@@ -37,8 +32,12 @@
             android:gravity="center"
             android:text="Button" />
 
-        <RelativeLayout>
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/england"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/england" />
+        
     </TableRow>
 
     <EditText
