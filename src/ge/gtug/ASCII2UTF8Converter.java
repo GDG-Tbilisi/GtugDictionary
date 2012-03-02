@@ -59,15 +59,4 @@ public class ASCII2UTF8Converter {
     return toASCII(input.toCharArray());
   }
 
-/*  public static void main(String[] args) {
-    // test input
-    String input = "ioseb ZmanaSvili";
-
-    // converted input
-    String converted = ASCII2UTF8Converter.toUTF8(input);
-
-    System.out.println(converted);
-    System.out.println(ASCII2UTF8Converter.toASCII(converted));
-
-  }*/
 }

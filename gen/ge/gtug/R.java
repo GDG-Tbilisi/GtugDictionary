@@ -22,7 +22,7 @@ public final class R {
     public static final class id {
         public static final int about=0x7f07000e;
         public static final int engWord=0x7f07000c;
-        public static final int england=0x7f070008;
+        public static final int england=0x7f070009;
         public static final int geoWord=0x7f07000d;
         public static final int georgia=0x7f070007;
         public static final int imageView1=0x7f070002;
@@ -31,7 +31,7 @@ public final class R {
         public static final int search=0x7f070005;
         public static final int searchButton=0x7f07000b;
         public static final int searchText=0x7f07000a;
-        public static final int switcher=0x7f070009;
+        public static final int switcher=0x7f070008;
         public static final int tableRow1=0x7f070001;
         public static final int tableRow2=0x7f070003;
         public static final int textView1=0x7f070004;
