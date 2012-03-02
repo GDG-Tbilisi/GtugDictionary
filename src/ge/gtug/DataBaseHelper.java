@@ -180,21 +180,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public String translateWord(Editable text) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
-		cursor = db.rawQuery(
-						"SELECT  geo FROM DicV WHERE eng LIKE ?",
-						new String[] {  text.toString()
-							+ "%" });
+		cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
 		
-		String result = null;
+		String result = "";
 		for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
-			result += cursor.getString(cursor.getColumnIndex("eng"))  + "\n";
+			result += cursor.getString(0) + " -  "+cursor.getString(1) + "\n";
 		}
 		/*adapter = new SimpleCursorAdapter(this, 
 				R.layout.word_list_item,
 				cursor, new String[] { "geoWord", "engWord" },
 				new int[] { R.id.engWord, R.id.geoWord});*/
-		 System.out.println("Result Returned" + result);
-		 System.out.println("text passed parameter: " + text);
+		 //System.out.println("Result Returned" + result);
+		 //System.out.println("text passed parameter: " + text);
+		
+		
 		return result;
 		
 	}
