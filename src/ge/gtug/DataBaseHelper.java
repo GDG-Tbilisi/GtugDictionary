@@ -183,8 +183,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
 		
 		String result = "";
+		ASCII2UTF8Converter toGeo = new ASCII2UTF8Converter();
 		for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
-			result += cursor.getString(0) + " -  "+cursor.getString(1) + "\n";
+			result += cursor.getString(0) + " -  "+toGeo.toUTF8(cursor.getString(1)) + "\n";
 		}
 		/*adapter = new SimpleCursorAdapter(this, 
 				R.layout.word_list_item,
