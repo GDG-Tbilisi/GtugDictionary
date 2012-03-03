@@ -91,17 +91,27 @@ public class GtugDictionaryActivity extends Activity {
 	}
 	 public void search(View view) {
 		 String result = "";	
-		 myDbHelper.openDataBase();
 		
-		if (isGeo){
+		 
+		 String text = searchText.getText().toString();
+
+		 if (text.equals("") || text.trim().length() == 0) {
+		   
+			result = "Not Found!";
+		 
+		}else if (isGeo){
+			 myDbHelper.openDataBase();
 			result += myDbHelper.translateWord(searchText.getText(), true);
+			myDbHelper.close();
 		}
 		else{
+			 myDbHelper.openDataBase();
 			result += myDbHelper.translateWord(searchText.getText(), false);
+			myDbHelper.close();
 		}
 		resultBox.setText(result);
 	
-		myDbHelper.close();
+		
 }
 
 	@Override
