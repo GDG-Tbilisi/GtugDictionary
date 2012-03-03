@@ -28,10 +28,10 @@ public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DataBaseHelper myDbHelper;
 	protected SQLiteDatabase db;
+
 	public ImageView geo;
 	public ImageView eng;
-	public boolean IsGeo = true;
-
+	public boolean isGeo = true;
 	protected EditText searchText, resultBox;
 	TextView txt;
 
@@ -53,13 +53,13 @@ public class GtugDictionaryActivity extends Activity {
 				if (i == 1) {
 					geo.setImageResource(R.drawable.england);
 					eng.setImageResource(R.drawable.georgia);
-					IsGeo = false;
+					isGeo = false;
 					i++;
 					button.setText("Geo-Eng");
 				} else {
 					geo.setImageResource(R.drawable.georgia);
 					eng.setImageResource(R.drawable.england);
-					IsGeo = true;
+					isGeo = true;
 					i--;
 					button.setText("Geo-Eng");
 				}
@@ -89,17 +89,20 @@ public class GtugDictionaryActivity extends Activity {
 		koba.inflate(R.menu.gtug_menu, menu);
 		return true;
 	}
-
-	public void search(View view) {
-		String result = "";
-
-		if (IsGeo)
+	 public void search(View view) {
+		 String result = "";	
+		 myDbHelper.openDataBase();
+		
+		if (isGeo){
 			result += myDbHelper.translateWord(searchText.getText(), true);
-		else
+		}
+		else{
 			result += myDbHelper.translateWord(searchText.getText(), false);
-
+		}
 		resultBox.setText(result);
-	}
+	
+		myDbHelper.close();
+}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

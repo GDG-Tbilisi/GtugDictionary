@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,9 +48,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	protected Cursor cursor;
 	protected ListAdapter adapter;
 
-	public static final String VIEW_NAME = "DicV";
-	//String createView = "CREATE VIEW IF NOT EXISTS DicV AS  Select g.geo,e.eng, e.transcription,t.name, t.abbr From geo_eng ge inner join geo g on ge.geo_id=g._id inner join eng e on ge.eng_id = e._id inner join types t on ge.type =t._id";
-	 String createView = "CREATE VIEW IF NOT EXISTS DicV AS select (select geo from geo g where g._id = ge.geo_id) as geo , (select eng from eng e where e._id = ge.eng_id) as eng from geo_eng ge ";
+	public static final String VIEW_NAME = "DicV";	
+	String createView = "CREATE VIEW IF NOT EXISTS DicV AS select (select geo from geo g where g._id = ge.geo_id) as geo , (select eng from eng e where e._id = ge.eng_id) as eng from geo_eng ge ";
+
 	public DataBaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.myContext = context;
@@ -176,23 +177,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public String translateWord(Editable text, boolean IsGeo) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
-		String result = "";
-		System.out.println("isgeo?? "+ IsGeo );
-	  //cursor = db.rawQuery("select * from geo g where g._id in (select l.geo_id from geo_eng l where l.eng_id in (select e._id from eng e where e.eng  like '"
-		//	+  text.toString() +s "%'"+"))", new String [] {});
+
+		String result = "";	
 		if(IsGeo){
 			cursor = db.rawQuery("SELECT geo,eng FROM DicV WHERE geo LIKE '"+  text.toString() + "%'",new String [] {} );
+			if (cursor ==null)
+				return result = "Not Found!"; 			
 			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
-				result += ASCII2UTF8Converter.toUTF8(cursor.getString(0)) + " - " + cursor.getString(1) + "\n";
+				result += ASCII2UTF8Converter.toUTF8(cursor.getString(0)) + " - " + cursor.getString(1) + "\n";				
 			}
 		}
 		else{
 			cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
+			if (cursor ==null)
+				return result = "Not Found!"; 
 			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
 				result += cursor.getString(0) + " - " + ASCII2UTF8Converter.toUTF8(cursor.getString(1)) + "\n";
 			}
 			
 		}
+		
+			cursor=null;  
+			
 			
 		
 		/*adapter = new SimpleCursorAdapter(this, 

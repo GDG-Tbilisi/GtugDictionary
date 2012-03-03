@@ -31,7 +31,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Geo - Eng" />
-
         <ImageView
             android:id="@+id/england"
             android:layout_width="wrap_content"
