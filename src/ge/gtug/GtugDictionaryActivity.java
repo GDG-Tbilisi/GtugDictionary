@@ -101,10 +101,7 @@ public class GtugDictionaryActivity extends Activity {
 		resultBox.setText(result);		
 	 }
 	 
-	 public void swithButton()
-	 {
-		 
-	 }
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
