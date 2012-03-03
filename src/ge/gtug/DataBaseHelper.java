@@ -181,7 +181,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		String result = "";	
 		if(IsGeo){
 			cursor = db.rawQuery("SELECT geo,eng FROM DicV WHERE geo LIKE '"+  text.toString() + "%'",new String [] {} );
-			if (cursor ==null)
+			if (cursor.getCount()<1)
 				return result = "Not Found!"; 			
 			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
 				result += ASCII2UTF8Converter.toUTF8(cursor.getString(0)) + " - " + cursor.getString(1) + "\n";				
@@ -189,13 +189,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		}
 		else{
 			cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
-			if (cursor ==null)
+			if (cursor.getCount()<1)
 				return result = "Not Found!"; 
 			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
 				result += cursor.getString(0) + " - " + ASCII2UTF8Converter.toUTF8(cursor.getString(1)) + "\n";
 			}
 			
 		}
+		 
 		
 			cursor=null;  
 			
