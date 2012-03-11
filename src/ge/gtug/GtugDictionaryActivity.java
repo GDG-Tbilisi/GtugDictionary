@@ -84,6 +84,7 @@ public class GtugDictionaryActivity extends Activity {
 		}
 
 	}
+	
 	public void search(View view) {
 		String result = "";
 		WordTranslator db = new WordTranslator(this);
@@ -95,11 +96,11 @@ public class GtugDictionaryActivity extends Activity {
 
 		} else if (isGeo) {
 			myDbHelper.openDataBase();
-			result += db.translateWord(searchText.getText(), true);
+			result += db.translateWord(text, true);
 			myDbHelper.close();
 		} else {
 			myDbHelper.openDataBase();
-			result += db.translateWord(searchText.getText(), false);
+			result += db.translateWord(text, false);
 			myDbHelper.close();
 		}
 		resultBox.setText(result);

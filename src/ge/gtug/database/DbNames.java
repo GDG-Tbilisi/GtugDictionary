@@ -1,6 +1,23 @@
 package ge.gtug.database;
 
-class DbNames {
+public class DbNames {
+	 public static enum View {
+		    TABLE ("DicV"),
+		    GEO_Word    ("geo"),
+		    ENG_WORD  ("eng");
+		    
+		    private String value;
+		        
+		    View(String value) {
+		      this.value = value;
+		    }
+		    
+		    @Override 
+		    public String toString() {
+		      return value;
+		    }
+		  }
+		  
 	  public static enum Geo {
 	    TABLE ("geo"),
 	    ID    ("id"),
