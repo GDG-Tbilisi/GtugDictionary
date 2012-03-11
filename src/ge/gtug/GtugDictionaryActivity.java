@@ -1,5 +1,7 @@
 package ge.gtug;
 
+import ge.gtug.database.DBHelper;
+
 import java.io.IOException;
 
 import android.app.Activity;
@@ -26,7 +28,7 @@ import android.widget.Toast;
 
 public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
-	DataBaseHelper myDbHelper;
+	DBHelper myDbHelper;
 	protected SQLiteDatabase db;
 
 	public ImageView geo;
@@ -45,7 +47,7 @@ public class GtugDictionaryActivity extends Activity {
 		eng = (ImageView) findViewById(R.id.england);
 		searchText = (EditText) findViewById(R.id.searchText);
 		final Button button = (Button) findViewById(R.id.switcher);
-		
+
 		button.setOnClickListener(new OnClickListener() {
 			int i = 1;
 
@@ -55,7 +57,7 @@ public class GtugDictionaryActivity extends Activity {
 					eng.setImageResource(R.drawable.georgia);
 					isGeo = false;
 					i++;
-					button.setText("Geo-Eng");
+					button.setText("Eng-Geo");
 				} else {
 					geo.setImageResource(R.drawable.georgia);
 					eng.setImageResource(R.drawable.england);
@@ -69,7 +71,7 @@ public class GtugDictionaryActivity extends Activity {
 
 		});
 
-		myDbHelper = new DataBaseHelper(this);
+		myDbHelper = new DBHelper(this);
 
 		resultBox = (EditText) findViewById(R.id.resultBox);
 
@@ -81,7 +83,27 @@ public class GtugDictionaryActivity extends Activity {
 		}
 
 	}
+	public void search(View view) {
+		String result = "";
 
+		String text = searchText.getText().toString();
+
+		if (text.equals("") || text.trim().length() == 0) {
+
+			result = "Not Found!";
+
+		} else if (isGeo) {
+			myDbHelper.openDataBase();
+			result += myDbHelper.translateWord(searchText.getText(), true);
+			myDbHelper.close();
+		} else {
+			myDbHelper.openDataBase();
+			result += myDbHelper.translateWord(searchText.getText(), false);
+			myDbHelper.close();
+		}
+		resultBox.setText(result);
+
+	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
@@ -89,31 +111,6 @@ public class GtugDictionaryActivity extends Activity {
 		koba.inflate(R.menu.gtug_menu, menu);
 		return true;
 	}
-	 public void search(View view) {
-		 String result = "";	
-		
-		 
-		 String text = searchText.getText().toString();
-
-		 if (text.equals("") || text.trim().length() == 0) {
-		   
-			result = "Not Found!";
-		 
-		}else if (isGeo){
-			 myDbHelper.openDataBase();
-			result += myDbHelper.translateWord(searchText.getText(), true);
-			myDbHelper.close();
-		}
-		else{
-			 myDbHelper.openDataBase();
-			result += myDbHelper.translateWord(searchText.getText(), false);
-			myDbHelper.close();
-		}
-		resultBox.setText(result);
-	
-		
-}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub

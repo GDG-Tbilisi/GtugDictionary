@@ -1,4 +1,4 @@
-package ge.gtug;
+package ge.gtug.database;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,13 +14,17 @@ import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import ge.gtug.ASCII2UTF8Converter;
+import ge.gtug.R;
+import ge.gtug.R.raw;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 	// The Android's default system path of your application database.
 	private static String DB_PATH = "/data/data/ge.gtug/databases/";
 	private static String DB_NAME = "ilingoka.db";
@@ -51,7 +55,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public static final String VIEW_NAME = "DicV";	
 	String createView = "CREATE VIEW IF NOT EXISTS DicV AS select (select geo from geo g where g._id = ge.geo_id) as geo , (select eng from eng e where e._id = ge.eng_id) as eng from geo_eng ge ";
 
-	public DataBaseHelper(Context context) {
+	public DBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.myContext = context;
 		resources = context.getResources();
