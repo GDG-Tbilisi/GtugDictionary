@@ -1,5 +1,6 @@
 package ge.gtug;
 
+import ge.gtug.bl.WordTranslator;
 import ge.gtug.database.DBHelper;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DBHelper myDbHelper;
 	protected SQLiteDatabase db;
-
+	 
 	public ImageView geo;
 	public ImageView eng;
 	public boolean isGeo = true;
@@ -85,7 +86,7 @@ public class GtugDictionaryActivity extends Activity {
 	}
 	public void search(View view) {
 		String result = "";
-
+		WordTranslator db = new WordTranslator(this);
 		String text = searchText.getText().toString();
 
 		if (text.equals("") || text.trim().length() == 0) {
@@ -94,11 +95,11 @@ public class GtugDictionaryActivity extends Activity {
 
 		} else if (isGeo) {
 			myDbHelper.openDataBase();
-			result += myDbHelper.translateWord(searchText.getText(), true);
+			result += db.translateWord(searchText.getText(), true);
 			myDbHelper.close();
 		} else {
 			myDbHelper.openDataBase();
-			result += myDbHelper.translateWord(searchText.getText(), false);
+			result += db.translateWord(searchText.getText(), false);
 			myDbHelper.close();
 		}
 		resultBox.setText(result);

@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static String DB_PATH = "/data/data/ge.gtug/databases/";
 	private static String DB_NAME = "ilingoka.db";
 	private static final int DB_VERSION = 2;
-	public static final String GEO = "geo";
+	/*public static final String GEO = "geo";
 	public static final String GEO_ID = "id";
 	public static final String GEO_WORD = "geo";
 	public static final String GEO_TYPE = "type";
@@ -44,7 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String TYPE_ID = "id";
 	public static final String TYPE_NAME = "name";
 	public static final String TYPE_ABBR = "abbr";
-
+*/
 	private SQLiteDatabase myDataBase;
 	private final Context myContext;
 	private Resources resources;
@@ -157,64 +157,5 @@ public class DBHelper extends SQLiteOpenHelper {
 		System.out.println("DB is Closed");
 
 		super.close();
-	}
-
-	// / All ather methods from here
-
-	public String getTranslation() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String result = null;
-		String[] columns = new String[] { TYPE_NAME, TYPE_ABBR };
-		Cursor c = db.query(TYPES, columns, null, null, null, null, null);
-
-		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-
-			result = c.getString(c.getColumnIndex(TYPE_NAME)) + " - "
-					+ c.getString(c.getColumnIndex(TYPE_ABBR)) + "\n"
-					+ "Bla bla";
-		}
-		System.out.println("result is " + result);
-		System.out.println("Result was Returned");
-		return result;
-	}
-
-	public String translateWord(Editable text, boolean IsGeo) {
-		// TODO Auto-generated method stub
-		SQLiteDatabase db = this.getReadableDatabase();
-
-		String result = "";	
-		if(IsGeo){
-			cursor = db.rawQuery("SELECT geo,eng FROM DicV WHERE geo LIKE '"+  text.toString() + "%'",new String [] {} );
-			if (cursor.getCount()<1)
-				return result = "Not Found!"; 			
-			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
-				result += ASCII2UTF8Converter.toUTF8(cursor.getString(0)) + " - " + cursor.getString(1) + "\n";				
-			}
-		}
-		else{
-			cursor = db.rawQuery("SELECT eng,geo FROM DicV WHERE eng LIKE '"+  text.toString() + "%'",new String [] {} );
-			if (cursor.getCount()<1)
-				return result = "Not Found!"; 
-			for (cursor.moveToFirst();!cursor.isLast(); cursor.moveToNext()) {
-				result += cursor.getString(0) + " - " + ASCII2UTF8Converter.toUTF8(cursor.getString(1)) + "\n";
-			}
-			
-		}
-		 
-		
-			cursor=null;  
-			
-			
-		
-		/*adapter = new SimpleCursorAdapter(this, 
-				R.layout.word_list_item,
-				cursor, new String[] { "geoWord", "engWord" },
-				new int[] { R.id.engWord, R.id.geoWord});*/
-		 //System.out.println("Result Returned" + result);
-		 //System.out.println("text passed parameter: " + text);
-		
-		
-		return result;
-		
 	}
 }
