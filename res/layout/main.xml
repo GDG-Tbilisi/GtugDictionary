@@ -18,4 +18,13 @@
         android:layout_marginTop="102dp"
         android:inputType="textMultiLine" />
 
+    <ListView
+        android:id="@+id/wordList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultBox"
+        android:layout_centerHorizontal="true" >
+
+    </ListView>
+
 </RelativeLayout>

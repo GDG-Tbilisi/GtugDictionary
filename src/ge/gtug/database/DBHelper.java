@@ -158,24 +158,4 @@ public class DBHelper extends SQLiteOpenHelper {
 
 		super.close();
 	}
-
-	// / All ather methods from here
-
-/*	public String getTranslation() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String result = null;
-		String[] columns = new String[] { TYPE_NAME, TYPE_ABBR };
-		Cursor c = db.query(TYPES, columns, null, null, null, null, null);
-
-		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-
-			result = c.getString(c.getColumnIndex(TYPE_NAME)) + " - "
-					+ c.getString(c.getColumnIndex(TYPE_ABBR)) + "\n"
-					+ "Bla bla";
-		}
-		System.out.println("result is " + result);
-		System.out.println("Result was Returned");
-		return result;
-	}*/
-
 }

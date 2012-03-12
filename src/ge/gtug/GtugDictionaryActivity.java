@@ -2,10 +2,14 @@ package ge.gtug;
 
 import ge.gtug.bl.WordTranslator;
 import ge.gtug.database.DBHelper;
+import ge.gtug.enrty.TranslationEntry;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,9 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +43,8 @@ public class GtugDictionaryActivity extends Activity {
 	public boolean isGeo = true;
 	protected EditText searchText, resultBox;
 	TextView txt;
-
+	 ListView list;
+	 private List wordList;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,26 +93,55 @@ public class GtugDictionaryActivity extends Activity {
 	}
 	
 	public void search(View view) {
-		String result = "";
+		//String result = "";
+		ArrayList<TranslationEntry> result = new ArrayList();
 		WordTranslator db = new WordTranslator(this);
-		String text = searchText.getText().toString();
+		String text = searchText.getText().toString().trim();
 
 		if (text.equals("") || text.trim().length() == 0) {
 
-			result = "Not Found!";
+	//		result = "Not Found!";
 
 		} else if (isGeo) {
 			myDbHelper.openDataBase();
-			result += db.translateWord(text, true);
+			result = db.translateWord(text, true);
 			myDbHelper.close();
 		} else {
 			myDbHelper.openDataBase();
-			result += db.translateWord(text, false);
+			result = db.translateWord(text, false);
 			myDbHelper.close();
 		}
-		resultBox.setText(result);
+		list = (ListView) findViewById(R.id.wordList);
+		wordList = new ArrayList();
+		 if (isGeo) {
+		wordList = getGeoList(result);
+		 }else{
+				wordList = getEngList(result);
+		 }
+			
+			list.setAdapter(new ArrayAdapter<TranslationEntry>(GtugDictionaryActivity.this, android.R.layout.simple_list_item_1,wordList));
+				
+		resultBox.setText("xx");
 
 	}
+	private List getEngList(ArrayList<TranslationEntry> result) {
+		// TODO Auto-generated method stub
+		for(TranslationEntry entry : result){
+			 wordList.add( entry.getTarget()+ "-" +entry.getSource() );
+			 	//System.out.println(entry.getSource() + "-" + entry.getTarget());
+		 	}
+		return wordList;
+	}
+
+	private List getGeoList(ArrayList<TranslationEntry> result) {
+		// TODO Auto-generated method stub
+		for(TranslationEntry entry : result){
+			 wordList.add(entry.getSource() + "-" + entry.getTarget());
+			 	//System.out.println(entry.getSource() + "-" + entry.getTarget());
+		 	}
+		return wordList;
+	}
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
