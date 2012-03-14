@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -121,6 +123,17 @@ public class GtugDictionaryActivity extends Activity {
 			
 			list.setAdapter(new ArrayAdapter<TranslationEntry>(GtugDictionaryActivity.this, android.R.layout.simple_list_item_1,wordList));
 				
+			
+			list.setOnItemClickListener(new OnItemClickListener() {
+
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+				//	Toast.makeText(ListView.this, "clicked", Toast.LENGTH_LONG);
+					
+				}
+				
+			});
+	         
 		resultBox.setText("xx");
 
 	}
