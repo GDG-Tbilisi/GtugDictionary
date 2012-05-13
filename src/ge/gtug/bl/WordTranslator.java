@@ -35,17 +35,13 @@ public class WordTranslator extends DBHelper {
 				DbNames.View.ENG_WORD.toString() };
 		Cursor c = db.query(DbNames.View.TABLE.toString(), columns,
 				columns[i].toString() + " Like '" + text.toString() + "%'",
-				null, null, null, null);
+				null, null, null, null,"10");
 
 		for (c.moveToFirst(); !c.isLast(); c.moveToNext()) {
-			// result += c.getString(1) + " - "+
-			// ASCII2UTF8Converter.toUTF8(c.getString(0)) + "\n";
 			String source = ASCII2UTF8Converter.toUTF8(c.getString(0))
 					.toString();
 			String target = c.getString(1).toString();
 			result.add(new TranslationEntry(source, target));
-
-			
 		}
 			cursor = null;
 			return result;
