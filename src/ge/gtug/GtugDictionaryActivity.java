@@ -42,7 +42,7 @@ public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
 	DBHelper myDbHelper;
 	protected SQLiteDatabase db;
-	private Handler handler = new Handler(); 
+	private Handler handler = new Handler();
 	public ImageView geo;
 	public ImageView eng;
 	public boolean isGeo = true;
@@ -50,18 +50,18 @@ public class GtugDictionaryActivity extends Activity {
 	TextView txt;
 	ListView list;
 	private List wordList;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		txt = (TextView) findViewById(R.id.textView1);		
+		txt = (TextView) findViewById(R.id.textView1);
 		geo = (ImageView) findViewById(R.id.georgia);
 		eng = (ImageView) findViewById(R.id.england);
-		searchText = (EditText) findViewById(R.id.searchText);		
+		searchText = (EditText) findViewById(R.id.searchText);
 		final Button button = (Button) findViewById(R.id.switcher);
-		final ImageButton search = (ImageButton)findViewById(R.id.searchButton);
-		final ProgressBar prog = (ProgressBar)findViewById(R.id.progressbar);
+		final ImageButton search = (ImageButton) findViewById(R.id.searchButton);
+		final ProgressBar prog = (ProgressBar) findViewById(R.id.progressbar);
 		search.setVisibility(0);
 		prog.setVisibility(8);
 
@@ -89,7 +89,6 @@ public class GtugDictionaryActivity extends Activity {
 		});
 
 		myDbHelper = new DBHelper(this);
-		
 
 		try {
 			myDbHelper.createDataBase();
@@ -98,104 +97,81 @@ public class GtugDictionaryActivity extends Activity {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	public void search(View view) {
-		final ImageButton search = (ImageButton)findViewById(R.id.searchButton);
-		final ProgressBar prog = (ProgressBar)findViewById(R.id.progressbar);
+		final ImageButton search = (ImageButton) findViewById(R.id.searchButton);
+		final ProgressBar prog = (ProgressBar) findViewById(R.id.progressbar);
 		search.setVisibility(8);
 		prog.setVisibility(0);
-		
+
 		new Thread(new Runnable() {
 
 			public void run() {
-				
-					//String result = "";
-							ArrayList<TranslationEntry> result = new ArrayList();							
-							WordTranslator db = new WordTranslator(GtugDictionaryActivity.this);
-							String text = searchText.getText().toString().trim();
 
-							if (text.equals("") || text.trim().length() == 0) {
+				// String result = "";
+				ArrayList<TranslationEntry> result = new ArrayList();
+				WordTranslator db = new WordTranslator(
+						GtugDictionaryActivity.this);
+				String text = searchText.getText().toString().trim();
 
-						//		result = "Not Found!";
+				if (text.equals("") || text.trim().length() == 0) {
+				} else if (isGeo) {
+					myDbHelper.openDataBase();
+					result = db.translateWord(text, true, this);
+					myDbHelper.close();
+				} else {
+					myDbHelper.openDataBase();
+					result = db.translateWord(text, false, this);
+					myDbHelper.close();
+				}
+				wordList = new ArrayList();
+				if (isGeo) {
+					wordList = getGeoList(result);
+				} else {
+					wordList = getEngList(result);
+				}
+				handler.post(new Runnable() {
+					public void run() {
+						list = (ListView) findViewById(R.id.wordList);
+						list.setTextFilterEnabled(true);
+						list.setAdapter(new ArrayAdapter<TranslationEntry>(
+								GtugDictionaryActivity.this,
+								android.R.layout.simple_list_item_1, wordList));
+						list.setOnItemClickListener(new OnItemClickListener() {
 
-							} else if (isGeo) {
-								myDbHelper.openDataBase();								
-								result = db.translateWord(text, true,this);								
-								myDbHelper.close();
-							} else {
-								myDbHelper.openDataBase();
-								result = db.translateWord(text, false,this);
-								myDbHelper.close();
+							public void onItemClick(AdapterView<?> parent,
+									View view, int position, long id) {
+								System.out.println("onItemClick  : " + position
+										+ "child count  ");
 							}
-							
-												
-							wordList = new ArrayList();							
-							 if (isGeo && result!=null) {
-								 //Toast.makeText(this, "found!", Toast.LENGTH_LONG);
-								 wordList = getGeoList(result);
-							 }else{
-								 if (result!=null)
-									 wordList = getEngList(result);
-									 //Toast.makeText(this, "Word can't be found!", Toast.LENGTH_LONG);								 
-									wordList = getEngList(result);
-							 }			
-								   				
-									handler.post(new Runnable()
-									{
-										public void run()
-										{	
-											list = (ListView) findViewById(R.id.wordList);	
-											list.setTextFilterEnabled(true);
-											list.setAdapter(new ArrayAdapter<TranslationEntry>(GtugDictionaryActivity.this, android.R.layout.simple_list_item_1,wordList));								
-											list.setOnItemClickListener(new OnItemClickListener() {
-
-													public void onItemClick(AdapterView<?> arg0, View arg1,
-															int arg2, long arg3) {
-													//	Toast.makeText(ListView.this, "clicked", Toast.LENGTH_LONG);
-														
-													}
-													
-												});
-											}
-										});		
-			
-				handler.post(new Runnable()
-				{
-					public void run()
-					{				
-						prog.setVisibility(8);						
+						});
+					}
+				});
+				handler.post(new Runnable() {
+					public void run() {
+						prog.setVisibility(8);
 						search.setVisibility(0);
-						}
-					});					
-			}		
-			
-		}).start();	
-		
-	}
-	
+					}
+				});
+			}
 
-	
-	
-	
-	
-	
-	
-	
+		}).start();
+
+	}
+
 	private List getEngList(ArrayList<TranslationEntry> result) {
 		// TODO Auto-generated method stub
-		for(TranslationEntry entry : result){
-			 wordList.add( entry.getTarget()+ "-" +entry.getSource() );
-			 	//System.out.println(entry.getSource() + "-" + entry.getTarget());
-		 	}
+		for (TranslationEntry entry : result) {
+			wordList.add(entry.getTarget() + "-" + entry.getSource());
+		}
 		return wordList;
 	}
 
 	private List getGeoList(ArrayList<TranslationEntry> result) {
 		// TODO Auto-generated method stub
-		for(TranslationEntry entry : result){
-			 wordList.add(entry.getSource() + "-" + entry.getTarget());
-			 	//System.out.println(entry.getSource() + "-" + entry.getTarget());
-		 	}
+		for (TranslationEntry entry : result) {
+			wordList.add(entry.getSource() + "-" + entry.getTarget());
+		}
 		return wordList;
 	}
 
@@ -206,6 +182,7 @@ public class GtugDictionaryActivity extends Activity {
 		koba.inflate(R.menu.gtug_menu, menu);
 		return true;
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
