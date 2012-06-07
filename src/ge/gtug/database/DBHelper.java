@@ -88,13 +88,9 @@ public class DBHelper extends SQLiteOpenHelper {
 			this.getReadableDatabase();
 
 			try {
-
 				copyDataBase();
-				System.out.println("oDatabase Copy");
-
 				SQLiteDatabase db = this.getReadableDatabase();
-				db.execSQL(createView);
-				System.out.println("View Created");
+				db.execSQL(createView);				
 			} catch (IOException e) {
 
 				throw new Error("Error copying database");
@@ -146,7 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		String myPath = DB_PATH + DB_NAME;
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null,
 				SQLiteDatabase.OPEN_READONLY);
-		System.out.println("DB is Opened");
+		//System.out.println("DB is Opened");
 	}
 
 	@Override
@@ -154,7 +150,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		if (myDataBase != null) {
 			myDataBase.close();
 		}
-		System.out.println("DB is Closed");
+		//System.out.println("DB is Closed");
 
 		super.close();
 	}

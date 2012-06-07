@@ -3,12 +3,15 @@ package ge.gtug.bl;
 import java.util.ArrayList;
 
 import ge.gtug.ASCII2UTF8Converter;
+import ge.gtug.GtugDictionaryActivity;
 import ge.gtug.database.DBHelper;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.Editable;
+import android.util.Log;
+import android.widget.Toast;
 import ge.gtug.database.DbNames;
 import ge.gtug.enrty.TranslationEntry;
 
@@ -21,7 +24,9 @@ public class WordTranslator extends DBHelper {
 
 	private SQLiteDatabase myDataBase;
 
-	public ArrayList<TranslationEntry> translateWord(String text, boolean isGeo) {
+	public ArrayList<TranslationEntry> translateWord(String text,
+			boolean isGeo, Object o) {
+
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<TranslationEntry> result = new ArrayList<TranslationEntry>();
@@ -35,15 +40,19 @@ public class WordTranslator extends DBHelper {
 				DbNames.View.ENG_WORD.toString() };
 		Cursor c = db.query(DbNames.View.TABLE.toString(), columns,
 				columns[i].toString() + " Like '" + text.toString() + "%'",
-				null, null, null, null,"10");
-
-		for (c.moveToFirst(); !c.isLast(); c.moveToNext()) {
-			String source = ASCII2UTF8Converter.toUTF8(c.getString(0))
-					.toString();
-			String target = c.getString(1).toString();
-			result.add(new TranslationEntry(source, target));
+				null, null, null, null, "10");
+		if (c.getCount() != 0) {
+			for (c.moveToFirst(); !c.isLast(); c.moveToNext()) {
+				String source = ASCII2UTF8Converter.toUTF8(c.getString(0))
+						.toString();
+				String target = c.getString(1).toString();
+				result.add(new TranslationEntry(source, target));
+			}
+		} else {
+			result.add(new TranslationEntry("Not Found", "Not Found"));
 		}
-			cursor = null;
-			return result;
+
+		c = null;
+		return result;
 	}
 }

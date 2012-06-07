@@ -3,26 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="4px" >
+    android:paddingTop="4px">
 
     <include
         android:id="@+id/search"
-        layout="@layout/search" />
-
-    <EditText
-        android:id="@+id/resultBox"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/search"
-        android:layout_marginTop="102dp"
-        android:inputType="textMultiLine" />
-
+        layout="@layout/search"/>
+    
     <ListView
         android:id="@+id/wordList"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/resultBox"
+        android:layout_below="@id/search"
         android:layout_centerHorizontal="true" >
 
     </ListView>
