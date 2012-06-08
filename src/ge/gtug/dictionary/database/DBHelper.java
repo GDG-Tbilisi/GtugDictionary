@@ -14,8 +14,8 @@ import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import ge.gtug.R;
-import ge.gtug.R.raw;
+import ge.gtug.dictionary.R;
+import ge.gtug.dictionary.R.raw;
 import ge.gtug.dictionary.ASCII2UTF8Converter;
 
 import java.io.File;
@@ -26,7 +26,7 @@ import java.io.OutputStream;
 
 public class DBHelper extends SQLiteOpenHelper {
 	// The Android's default system path of your application database.
-	private static String DB_PATH = "/data/data/ge.gtug/databases/";
+	private static String DB_PATH = "/data/data/ge.gtug.dictionary/databases/";
 	private static String DB_NAME = "ilingoka.db";
 	private static final int DB_VERSION = 2;
 	/*public static final String GEO = "geo";

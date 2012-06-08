@@ -52,7 +52,7 @@ public class WordTranslator extends DBHelper {
 			result.add(new TranslationEntry("Not Found", "Not Found"));
 		}
 
-		c = null;
+		c.close();
 		return result;
 	}
 }

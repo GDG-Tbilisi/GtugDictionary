@@ -1,6 +1,6 @@
 package ge.gtug.dictionary;
 
-import ge.gtug.R;
+import ge.gtug.dictionary.R;
 import ge.gtug.dictionary.bl.WordTranslator;
 import ge.gtug.dictionary.database.DBHelper;
 import ge.gtug.dictionary.enrty.TranslationEntry;
