@@ -1,4 +1,4 @@
-package ge.gtug.database;
+package ge.gtug.dictionary.database;
 
 public class DbNames {
 	 public static enum View {

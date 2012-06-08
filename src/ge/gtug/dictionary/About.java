@@ -1,5 +1,6 @@
-package ge.gtug;
+package ge.gtug.dictionary;
 
+import ge.gtug.R;
 import android.app.Activity;
 import android.os.Bundle;
 

@@ -1,10 +1,7 @@
-package ge.gtug.bl;
+package ge.gtug.dictionary.bl;
 
 import java.util.ArrayList;
 
-import ge.gtug.ASCII2UTF8Converter;
-import ge.gtug.GtugDictionaryActivity;
-import ge.gtug.database.DBHelper;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,8 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.Editable;
 import android.util.Log;
 import android.widget.Toast;
-import ge.gtug.database.DbNames;
-import ge.gtug.enrty.TranslationEntry;
+import ge.gtug.dictionary.ASCII2UTF8Converter;
+import ge.gtug.dictionary.GtugDictionaryActivity;
+import ge.gtug.dictionary.database.DBHelper;
+import ge.gtug.dictionary.database.DbNames;
+import ge.gtug.dictionary.enrty.TranslationEntry;
 
 public class WordTranslator extends DBHelper {
 

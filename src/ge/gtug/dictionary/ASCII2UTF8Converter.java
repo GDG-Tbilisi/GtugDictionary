@@ -1,4 +1,4 @@
-package ge.gtug;
+package ge.gtug.dictionary;
 
 
 import java.util.HashMap;

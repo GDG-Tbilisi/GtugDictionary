@@ -1,4 +1,4 @@
-package ge.gtug.enrty;
+package ge.gtug.dictionary.enrty;
 
 public class TranslationEntry {
 	String source;

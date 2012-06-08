@@ -1,4 +1,4 @@
-package ge.gtug.database;
+package ge.gtug.dictionary.database;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,9 +14,9 @@ import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import ge.gtug.ASCII2UTF8Converter;
 import ge.gtug.R;
 import ge.gtug.R.raw;
+import ge.gtug.dictionary.ASCII2UTF8Converter;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,8 +1,9 @@
-package ge.gtug;
+package ge.gtug.dictionary;
 
-import ge.gtug.bl.WordTranslator;
-import ge.gtug.database.DBHelper;
-import ge.gtug.enrty.TranslationEntry;
+import ge.gtug.R;
+import ge.gtug.dictionary.bl.WordTranslator;
+import ge.gtug.dictionary.database.DBHelper;
+import ge.gtug.dictionary.enrty.TranslationEntry;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//Testing Commit
 
 public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
