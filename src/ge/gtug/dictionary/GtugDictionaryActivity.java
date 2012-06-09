@@ -60,7 +60,24 @@ public class GtugDictionaryActivity extends Activity {
 		final ProgressBar prog = (ProgressBar) findViewById(R.id.progressbar);
 		search.setVisibility(0);
 		prog.setVisibility(8);
-
+		searchText.addTextChangedListener(new TextWatcher() {
+			
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				search(prog);
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		button.setOnClickListener(new OnClickListener() {
 			int i = 1;
 
@@ -137,9 +154,6 @@ public class GtugDictionaryActivity extends Activity {
 								Intent in = new Intent();
 								in.setClass(getApplicationContext(), DetailActivity.class);
 								startActivity(in);
-								System.out.println("onItemClick  : " + position
-										+ "child count  ");
-								
 							}
 						});
 					}
