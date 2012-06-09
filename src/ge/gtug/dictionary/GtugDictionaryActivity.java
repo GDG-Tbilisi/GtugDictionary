@@ -134,7 +134,9 @@ public class GtugDictionaryActivity extends Activity {
  * for detail information about selected word */
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								
+								Intent in = new Intent();
+								in.setClass(getApplicationContext(), DetailActivity.class);
+								startActivity(in);
 								System.out.println("onItemClick  : " + position
 										+ "child count  ");
 								

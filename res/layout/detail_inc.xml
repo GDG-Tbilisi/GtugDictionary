@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"  
+    android:paddingTop="4px">  
+
+    <LinearLayout
+        android:id="@+id/lay"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+        android:id="@+id/testText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="ase haershi t"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+    </LinearLayout>
+
+   
+    
+</RelativeLayout>

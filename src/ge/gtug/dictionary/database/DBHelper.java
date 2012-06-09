@@ -29,22 +29,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static String DB_PATH = "/data/data/ge.gtug.dictionary/databases/";
 	private static String DB_NAME = "ilingoka.db";
 	private static final int DB_VERSION = 2;
-	/*public static final String GEO = "geo";
-	public static final String GEO_ID = "id";
-	public static final String GEO_WORD = "geo";
-	public static final String GEO_TYPE = "type";
-
-	public static final String ENG = "eng";
-	public static final String ENG_ID = "id";
-	public static final String ENG_WORD = "eng";
-	public static final String ENG_TYPE = "type";
-	public static final String TRANSCRIPTOPN = "transcription";
-
-	public static final String TYPES = "types";
-	public static final String TYPE_ID = "id";
-	public static final String TYPE_NAME = "name";
-	public static final String TYPE_ABBR = "abbr";
-*/
 	private SQLiteDatabase myDataBase;
 	private final Context myContext;
 	private Resources resources;
@@ -65,8 +49,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 
-		// System.out.println("onCreate Called");
-		// System.out.println("View Created");
 	}
 
 	@Override
@@ -142,7 +124,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		String myPath = DB_PATH + DB_NAME;
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null,
 				SQLiteDatabase.OPEN_READONLY);
-		//System.out.println("DB is Opened");
 	}
 
 	@Override
@@ -150,8 +131,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		if (myDataBase != null) {
 			myDataBase.close();
 		}
-		//System.out.println("DB is Closed");
-
 		super.close();
 	}
 }
