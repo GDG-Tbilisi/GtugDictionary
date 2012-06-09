@@ -18,13 +18,11 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -35,8 +33,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 public class GtugDictionaryActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -105,15 +101,11 @@ public class GtugDictionaryActivity extends Activity {
 		prog.setVisibility(0);
 
 		new Thread(new Runnable() {
-
 			public void run() {
-
-				// String result = "";
 				ArrayList<TranslationEntry> result = new ArrayList();
 				WordTranslator db = new WordTranslator(
 						GtugDictionaryActivity.this);
 				String text = searchText.getText().toString().trim();
-
 				if (text.equals("") || text.trim().length() == 0) {
 				} else if (isGeo) {
 					myDbHelper.openDataBase();
@@ -138,11 +130,14 @@ public class GtugDictionaryActivity extends Activity {
 								GtugDictionaryActivity.this,
 								android.R.layout.simple_list_item_1, wordList));
 						list.setOnItemClickListener(new OnItemClickListener() {
-
+/*Redirect to another activity 
+ * for detail information about selected word */
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
+								
 								System.out.println("onItemClick  : " + position
 										+ "child count  ");
+								
 							}
 						});
 					}
@@ -178,8 +173,8 @@ public class GtugDictionaryActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
-		MenuInflater koba = getMenuInflater();
-		koba.inflate(R.menu.gtug_menu, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.gtug_menu, menu);
 		return true;
 	}
 

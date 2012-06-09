@@ -21,20 +21,17 @@ public class WordTranslator extends DBHelper {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
-
 	private SQLiteDatabase myDataBase;
-
 	public ArrayList<TranslationEntry> translateWord(String text,
 			boolean isGeo, Object o) {
-
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<TranslationEntry> result = new ArrayList<TranslationEntry>();
-		// String result = "";
 
 		int i = 0;
-		if (!isGeo)
+		if (!isGeo){
 			i = 1;
+		}
 
 		String[] columns = new String[] { DbNames.View.GEO_Word.toString(),
 				DbNames.View.ENG_WORD.toString() };
@@ -51,7 +48,6 @@ public class WordTranslator extends DBHelper {
 		} else {
 			result.add(new TranslationEntry("Not Found", "Not Found"));
 		}
-
 		c.close();
 		return result;
 	}
