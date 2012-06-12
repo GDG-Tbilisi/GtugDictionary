@@ -61,21 +61,22 @@ public class GtugDictionaryActivity extends Activity {
 		search.setVisibility(0);
 		prog.setVisibility(8);
 		searchText.addTextChangedListener(new TextWatcher() {
-			
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
 				// TODO Auto-generated method stub
 				search(prog);
 			}
-			
+
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		button.setOnClickListener(new OnClickListener() {
@@ -147,12 +148,18 @@ public class GtugDictionaryActivity extends Activity {
 								GtugDictionaryActivity.this,
 								android.R.layout.simple_list_item_1, wordList));
 						list.setOnItemClickListener(new OnItemClickListener() {
-/*Redirect to another activity 
- * for detail information about selected word */
+							/*
+							 * Redirect to another activity for detail
+							 * information about selected word
+							 */
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
+								String selectedWord = (String) list
+										.getItemAtPosition(position);
 								Intent in = new Intent();
-								in.setClass(getApplicationContext(), DetailActivity.class);
+								in.setClass(getApplicationContext(),
+										DetailActivity.class);
+								in.putExtra("selectedWord", selectedWord);
 								startActivity(in);
 							}
 						});
