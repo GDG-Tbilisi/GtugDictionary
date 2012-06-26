@@ -13,12 +13,12 @@ public class DetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail);
 		
-		Bundle extras = getIntent().getExtras();
+		/*Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 			return;
 		}
 		selectedWord = extras.getString("selectedWord");
 		tv = (TextView) findViewById(R.id.selectedWord);
-		tv.setText(selectedWord);
+		tv.setText(selectedWord);*/
 	}
 }

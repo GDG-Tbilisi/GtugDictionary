@@ -3,10 +3,23 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="4px">
-    
-    <include
+    android:paddingTop="4px"
+    android:background="#FFFFFF" >
+
+    <!--
+         <include
         android:id="@+id/detail_inc"
-        layout="@layout/detail_inc" />
+        layout="@layout/detail_inc" />
+    -->       
+
+    <ImageView
+        android:id="@+id/imageCommingSoon"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"    
+        android:src="@drawable/commingsoonp" />
+
+
 
 </RelativeLayout>

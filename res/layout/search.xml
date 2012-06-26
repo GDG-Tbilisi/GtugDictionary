@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"  
-    android:paddingTop="4px">    
+    android:paddingTop="4px"
+    android:background="@layout/main_header_color">
    <LinearLayout       
        android:id="@+id/firstLay"
        android:layout_width="fill_parent"
