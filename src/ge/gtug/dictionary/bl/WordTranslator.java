@@ -48,6 +48,7 @@ public class WordTranslator extends DBHelper {
 		} else {
 			result.add(new TranslationEntry("Not Found", "Not Found"));
 		}
+		db.close();
 		c.close();
 		return result;
 	}

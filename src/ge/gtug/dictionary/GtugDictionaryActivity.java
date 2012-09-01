@@ -65,18 +65,32 @@ public class GtugDictionaryActivity extends Activity {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
+			
+				
 				search(prog);
+				//	Log.d("After Thread", "Message");
+			
+				
 			}
-
+			
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+			//	Log.d("Log", "beforeTextChanged");
 			}
-
+			
+			
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-
+				/*Thread.currentThread();
+				try {
+					Thread.sleep(5000);		
+				
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+		//		Log.d("Log", "afterTextChanged");
 			}
 		});
 		button.setOnClickListener(new OnClickListener() {
@@ -120,19 +134,26 @@ public class GtugDictionaryActivity extends Activity {
 
 		new Thread(new Runnable() {
 			public void run() {
+				try {
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Log.d("thread", "end");
 				ArrayList<TranslationEntry> result = new ArrayList();
 				WordTranslator db = new WordTranslator(
 						GtugDictionaryActivity.this);
 				String text = searchText.getText().toString().trim();
 				if (text.equals("") || text.trim().length() == 0) {
 				} else if (isGeo) {
-					myDbHelper.openDataBase();
+				//	myDbHelper.openDataBase();
 					result = db.translateWord(text, true, this);
-					myDbHelper.close();
+				//	myDbHelper.close();
 				} else {
-					myDbHelper.openDataBase();
+				//	myDbHelper.openDataBase();
 					result = db.translateWord(text, false, this);
-					myDbHelper.close();
+				//	myDbHelper.close();
 				}
 				wordList = new ArrayList();
 				if (isGeo) {
