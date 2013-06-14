@@ -1,20 +1,8 @@
 package ge.gtug.dictionary;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class DetailActivity extends Activity {
@@ -26,7 +14,7 @@ public class DetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.detail);
+		setContentView(R.layout.detail_inc);
 
 	//	Bundle extras = getIntent().getExtras();
 	//	if (extras == null) {
@@ -38,7 +26,7 @@ public class DetailActivity extends Activity {
 	//	words = selectedWord.split("-");
 		
 		
-		 WebViewClient yourWebClient = new WebViewClient()
+/*		 WebViewClient yourWebClient = new WebViewClient()
 	       {
 	           // Override page so it's load on my view only
 	           @Override
@@ -52,19 +40,19 @@ public class DetailActivity extends Activity {
 	            // Return true to override url loading (In this case do nothing).
 	            return true;
 	           }
-	       };
+	       };*/
 	       
 	       
 	       // Get Web view
-	       mWebView = (WebView) findViewById( R.id.webView1 ); //This is the id you gave 
-	       mWebView.getSettings().setJavaScriptEnabled(true);   
-	       mWebView.getSettings().setSupportZoom(true);       //Zoom Control on web (You don't need this 
+//	       mWebView = (WebView) findViewById( R.id.webView1 ); //This is the id you gave
+//	       mWebView.getSettings().setJavaScriptEnabled(true);
+//	       mWebView.getSettings().setSupportZoom(true);       //Zoom Control on web (You don't need this
 	                                              //if ROM supports Multi-Touch      
-	       mWebView.getSettings().setBuiltInZoomControls(true); //Enable Multitouch if supported by ROM
-	       mWebView.setWebViewClient(yourWebClient);
+//	       mWebView.getSettings().setBuiltInZoomControls(true); //Enable Multitouch if supported by ROM
+//	       mWebView.setWebViewClient(yourWebClient);
 	        
 	       // Load URL
-	       mWebView.loadUrl("http://www.google.com");
+//	       mWebView.loadUrl("http://www.google.com");
 		
 		
 

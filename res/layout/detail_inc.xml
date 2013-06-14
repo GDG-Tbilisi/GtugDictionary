@@ -12,18 +12,18 @@
         android:layout_height="100dp"
         android:gravity="center"
         android:orientation="horizontal" >
-        
-        <TextView
-        android:id="@+id/selectedWord"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Comming soon..."
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-        
+
     </LinearLayout>
 
-   
-    
+    <TextView
+    android:id="@+id/selectedWord"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:text="Comming soon..."
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:background="@drawable/commingsoonp"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"/>
+
+
 </RelativeLayout>

@@ -8,3 +8,5 @@
 *.so
 /bin
 /gen
+.idea
+/GtugDictionary.iml
